@@ -62,17 +62,17 @@ handle routine tasks in the cluster. Each controller is a seperate
 process but they are all compiled in a single binary for 
 simplicity. The controllers include:
 
- o Node Controller - Responsible for noticing and responding when
+ * Node Controller - Responsible for noticing and responding when
                      nodes crash.
 
- o Replication Controller - Responsible for maintaining the correct
+ * Replication Controller - Responsible for maintaining the correct
                      number of pods for every replication
                      controller object in the system.
 
- o Endpoints Controller - Populates the Endpoints object (That is 
+ * Endpoints Controller - Populates the Endpoints object (That is 
                      joins services and pods)
 
- o Service Account & Token Controllers - Create default accounts
+ * Service Account & Token Controllers - Create default accounts
                      and API access tokens for new namespaces. 
 
 kube-scheduler
