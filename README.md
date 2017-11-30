@@ -1,8 +1,6 @@
-
-..................................................................
-
+******************************************************************
 General Layout and Overview
-..................................................................
+******************************************************************
 
 This vagrantbox is designed to create a cluster of a master server 
 with at most 4 minions. The ip addresses asssociated with each are 
@@ -33,15 +31,14 @@ kubelet
 flanneld
 docker
 
-..................................................................
-
+******************************************************************
 Service Descriptions
-..................................................................
+******************************************************************
 
 A brief descritption of what each service is doing is now provided. 
 
 etcd
-....
+******************************************************************
 
 This is the backbone of kubernetes it uses the raft protocol which
 is ideal for distributed computing. It ensures that the machines 
@@ -51,14 +48,14 @@ It is used within the kubernetes framework as a backing store.
 Basically all the cluser data is stored with etcd. 
 
 kube-apiserver
-..............
+******************************************************************
 
 This service exposes the kubernetes api. It is the front-end or means
 by which user interacts with the kubernetes package. It scales by 
 deploying more instances (scales horizontally).
 
 kube-controller-manager
-.......................
+******************************************************************
 
 This service runs controllers; they are the baground threads that 
 handle routine tasks in the cluster. Each controller is a seperate 
@@ -79,13 +76,13 @@ simplicity. The controllers include:
                      and API access tokens for new namespaces. 
 
 kube-scheduler
-..............
+******************************************************************
 
 This service watches newly created pods that have no node assigned,
 and selects a node for them to run on. 
 
 flanneld
-........
+******************************************************************
 
 Flannel runs a small, single binary agent called flanneld on each 
 host, and is responsible for allocating a subnet lease to each host 
