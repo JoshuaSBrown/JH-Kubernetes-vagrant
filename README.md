@@ -6,30 +6,30 @@ This vagrantbox is designed to create a cluster of a master server
 with at most 4 minions. The ip addresses asssociated with each are 
 shown below:
 
-192.168.1.10 - master
-192.168.1.11 - minion1
-192.168.1.12 - minion2
-192.168.1.13 - minion3
-192.168.1.14 - minion4
+| 192.168.1.10 | master |
+| 192.168.1.11 | minion1 |
+| 192.168.1.12 | minion2 |
+| 192.168.1.13 | minion3 |
+| 192.168.1.14 | minion4 |
 
 The master node will act as a kubernetes server and will have the 
 following services running on it:
 
-etcd
-kube-apiserver
-kube-controller-manager
-kube-scheduler
-kube-proxy
-kubelet
-flanneld
-docker
+1. etcd
+2. kube-apiserver
+3. kube-controller-manager
+4. kube-scheduler
+5. kube-proxy
+6. kubelet
+7. flanneld
+8. docker
 
 Each minion will have the following services running:
 
-kube-proxy
-kubelet
-flanneld
-docker
+1. kube-proxy
+2. kubelet
+3. flanneld
+4. docker
 
 ******************************************************************
 Service Descriptions
