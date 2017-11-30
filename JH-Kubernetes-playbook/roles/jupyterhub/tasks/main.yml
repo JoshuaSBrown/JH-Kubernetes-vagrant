@@ -1,0 +1,86 @@
+---
+
+- pip:
+    name:       jupyterhub
+    executable: pip3
+
+- pip:
+    name:    notebook
+    executable: pip3
+
+# Create .jupyter folder in vagrant home directory
+- file:
+    path: /home/vagrant/.jupyter
+    state: directory
+    mode:  0700
+    owner: vagrant
+    group: vagrant
+
+- file:
+    path: /etc/jupyterhub/
+    state: directory
+    mode: 0700
+    owner: vagrant
+    group: vagrant
+
+# This is important because the jupyterhub.service file
+# indicates that is where to look for it
+- name: Copy jupyterhub config file to /etc/jupyterhub
+  copy:
+    src: jupyterhub_config.py
+    dest: /etc/jupyterhub/jupyterhub_config.py
+    mode: 0600
+    owner: vagrant
+    group: vagrant
+ 
+- name: Copy configuration files for jupyter notebook
+  copy:
+    src:   jupyter_notebook_config.json
+    dest:  /home/vagrant/.jupyter/jupyter_notebook_config.json
+    mode:  0600
+    owner: vagrant
+    group: vagrant
+
+- copy:
+    src:   jupyter_notebook_config.py
+    dest:  /home/vagrant/.jupyter/jupyter_notebook_config.py
+    mode:  0664
+    owner: vagrant
+    group: vagrant
+
+- copy:
+    src:   mycert.pem
+    dest:  /home/vagrant/.jupyter/mycert.pem
+    mode:  0664
+    owner: vagrant
+    group: vagrant
+
+- copy:
+    src:   mykey.key
+    dest:  /home/vagrant/.jupyter/mykey.key
+    mode:  0664
+    owner: vagrant
+    group: vagrant
+
+# Copy file so jupyterhub will start on boot
+- copy:
+    src: jupyterhub.service
+    dest: /lib/systemd/system/jupyterhub.service
+    mode: 0644
+    owner: vagrant
+    group: vagrant
+
+#- name: Start jupyterhub
+#  shell: /home/vagrant/run.sh
+
+- name: Install sudospawner which is necessary to start jupyterhub on boot
+  command: pip3 install git+https://github.com/jupyter/sudospawner
+
+- name: Install wrapspawner
+  command: pip3 install git+https://github.com/jupyterhub/wrapspawner
+
+- name: Reload the daemons
+  shell: systemctl daemon-reload
+
+- name: start jupyterhub
+  shell: service jupyterhub restart

@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  roles:
+    - common
+    - cluster
+    - docker
+    - flannel
+    - kubernetes-minion

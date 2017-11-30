@@ -1,0 +1,39 @@
+---
+
+- name: Install etcd
+  yum:
+    name:  etcd
+    state: latest
+
+- name: Copy etcd configure file with correct http addresses for client
+  copy:
+    src:   etcd.conf
+    dest:  /etc/etcd/etcd.conf
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Start service etcd 
+  service:
+    name:    etcd
+    state:   restarted
+    enabled: yes
+
+# Though this call will return an error if the key already exists
+# it will not do any harm if we call it, so we will just ignore the 
+# error
+#- name: Configure flannel network configuration in etcd
+#  command: etcdctl mk /atomic.io/network/config '''{"Network":"192.168.1.0/16"}'''$?>/dev/null && exit 0
+#  ignore_errors: True
+
+
+- name: Copy script to configure flannel etcd key value pair
+  copy:
+    src:   config-flannel-network.sh
+    dest:  /home/vagrant/config-flannel-network.sh
+    owner: root
+    group: root
+    mode:  0777
+
+- name: Execute script to create key-value pair
+  command: /home/vagrant/config-flannel-network.sh

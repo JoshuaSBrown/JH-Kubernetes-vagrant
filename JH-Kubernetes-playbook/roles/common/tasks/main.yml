@@ -1,0 +1,52 @@
+--- 
+
+# Update all packages
+- name: Update
+  yum:
+    name:  '*'
+    state: latest
+
+- name: Install minimum tool set
+  yum:
+    name: yum-utils
+
+- name: Install gcc-c++ 
+  yum:
+    name:  gcc-c++
+    state: latest
+
+- name: Install git
+  yum:
+    name: git
+    state: latest
+
+- name: Install make
+  yum:
+    name:  make
+    state: latest
+ 
+- name: Install python 3.4
+  yum:
+    name:  python34
+    state: latest
+
+- name: Install python34-setuptools
+  yum:
+    name:  python34-setuptools
+    state: latest
+
+- name: Easy install pip
+  easy_install:
+    name:       pip
+    state:      latest
+    executable: easy_install-3.4
+
+- name: Install vim for convenience
+  yum:
+    name:  vim
+    state: latest
+
+- name: Install net-tools for configuring network
+  yum:
+    name:  net-tools
+    state: latest

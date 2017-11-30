@@ -1,0 +1,20 @@
+---
+- name: Install flannel
+  yum:
+    name:  flannel
+    state: latest
+
+- name: Copy flanneld config file 
+  copy:
+    src:   flanneld
+    dest:  /etc/sysconfig/flanneld
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Start service flanneld 
+  service:
+    name:    flanneld
+    state:   restarted
+    enabled: yes
+

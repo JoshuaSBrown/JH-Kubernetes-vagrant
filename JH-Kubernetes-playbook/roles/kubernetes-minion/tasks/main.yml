@@ -1,0 +1,69 @@
+---
+
+- name: Install ntp
+  yum:
+    name:    ntp
+    state:   latest
+
+- name: Start up ntpd
+  service: 
+    name:    ntpd
+    state:   restarted
+    enabled: yes
+
+- name: Create kubernetes repo file
+  copy:
+    src:   kubernetes.repo
+    dest:  /etc/yum.repos.d/kubernetes.repo
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Install kubernetes
+  yum:
+    name:  kubernetes
+    state: latest    
+
+#- name: Install Kubeadm
+#  yum:
+#    name:  kubeadm
+#    state: latest
+
+#- name: Install kubelet
+#  yum:
+#    name:  kubelet
+#    state: latest
+
+#- name: Install kubectl
+#  yum:
+#    name:  kubectl
+#    state: latest
+
+- name: Copy kubernetes config file 
+  copy:
+    src:   config
+    dest:  /etc/kubernetes/config
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Copy kubernetes client config file
+  copy:
+    src:   kubelet
+    dest:  /etc/kubernetes/kubelet
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Start service kube-proxy
+  service:
+    name:    kube-proxy
+    state:   restarted
+    enabled: yes
+
+- name: Start service kubelet
+  service:
+    name:    kubelet
+    state:   restarted
+    enabled: yes
+

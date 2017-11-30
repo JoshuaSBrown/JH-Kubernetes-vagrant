@@ -1,0 +1,150 @@
+---
+
+- name: Install ntp
+  yum:
+    name:    ntp
+    state:   latest
+
+- name: Start up ntpd
+  service: 
+    name:    ntpd
+    state:   restarted
+    enabled: yes
+
+- name: Create kubernetes repo file
+  copy:
+    src:   kubernetes.repo
+    dest:  /etc/yum.repos.d/kubernetes.repo
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Install kubernetes
+  yum:
+    name:  kubernetes
+    state: latest    
+
+#- name: Update kubectrl version
+#  command: curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl 
+
+#- name: Change permissions
+#  command: chmod +x kubectl 
+
+#- name: Overwrite default install
+#  command: sudo mv kubectl $(which kubectl) 
+#- name: Install Kubeadm
+#  yum:
+#    name:  kubeadm
+#    state: latest
+
+#- name: Install kubelet
+#  yum:
+#    name:  kubelet
+#    state: latest
+
+#- name: Install kubectl
+#  yum:
+#    name:  kubectl
+#    state: latest
+
+#- name: Ensure traffic is being routed through iptables
+#  copy:
+#    src:   k8s.conf
+#    dest:  /etc/sysctl.d/k8s.conf
+#    owner: root
+#    group: root
+#    mode:  0644
+
+#- name: Update sysctl settings after changing iptables
+#  command: sysctl --system
+#
+- name: Copy kubernetes file apiserver 
+  copy:
+    src:   apiserver
+    dest:  /etc/kubernetes/apiserver
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Copy kubernetes config file 
+  copy:
+    src:   config
+    dest:  /etc/kubernetes/config
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Copy kubernetes client config file
+  copy:
+    src:   kubelet
+    dest:  /etc/kubernetes/kubelet
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Start service kube-apiserver
+  service:
+    name:    kube-apiserver
+    state:   restarted
+    enabled: yes
+
+- name: Start service kube-controller-manager
+  service:
+    name:    kube-controller-manager
+    state:   restarted
+    enabled: yes
+
+- name: Start service kube-scheduler
+  service:
+    name:    kube-scheduler
+    state:   restarted
+    enabled: yes
+
+- name: Start service kubelet
+  service:
+    name:    kubelet
+    state:   restarted
+    enabled: yes
+
+- name: Start kube-proxy
+  service:
+    name:    kube-proxy
+    state:   restarted
+    enabled: yes
+
+#- name: Copy helm binary tar file
+#  copy:
+#    src:   helm-v2.6.2-linux-amd64.tar.gz
+#    dest:  /home/vagrant/helm-v2.6.2-linux-amd64.tar.gz
+#    owner: vagrant
+#    group: vagrant
+#    mode:  0644
+
+#- name: Untar kubernetes package manager helm
+#  unarchive:
+#    src:  /home/vagrant/helm-v2.6.2-linux-amd64.tar.gz
+#    dest: /home/vagrant/
+
+#- name: Copy helm binary exectuable to /usr/local/bin
+#  copy:
+#    src:   /home/vagrant/linux-amd64/helm
+#    dest:  /usr/local/bin/helm
+#    mode:  0777
+
+#- name: Install tiller server
+#  command: helm init
+
+#- name: Install kubernetes dashboard using helm
+#  command: helm install stable/kubernetes-dashboard
+
+#- name: Install kubernetes dashboard
+#  command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+#- name: Start the Dashboard
+#  command: kubectl proxy
+
+#- name: Create namespace 
+#  command: kubectl namespace kube-system
+  
+#- name: Create deployment and service
+#  command: kubectl create -f kubernetes-dashboard.yaml

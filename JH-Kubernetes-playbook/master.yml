@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  roles:
+    - common
+    - cluster
+    - nodejs
+    - etcd
+    - flannel
+    - docker
+    - kubernetes-master

@@ -1,0 +1,35 @@
+---
+
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    
+- name: Install device-mapper-persistent-data
+  yum:
+    name: device-mapper-persistent-data
+
+- name: Install lvm2
+  yum:
+    name: lvm2
+
+- name: Install docker
+  yum:
+    name:  docker
+    state: latest
+
+#- name: Copy docker rpm (Community Edition) 
+#  copy:
+#    src:  docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm
+#    dest: /home/vagrant/docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm
+
+#- name: Install stable docker rpm package 
+#  yum:
+#    name:  /home/vagrant/docker-ce-17.09.0.ce-1.el7.centos.x86_64.rpm
+#    state: present
+
+- name: Start docker service
+  service:
+    name:    docker
+    enabled: yes
+    state:   restarted
+

@@ -1,0 +1,17 @@
+---
+
+- name: Install npm
+  yum:
+    name: npm
+    state: latest
+
+- name: Install nodejs
+  yum:
+    name: nodejs
+    state: latest
+
+- name: Install global proxy with npm 
+  npm:
+    name:   configurable-http-proxy
+    global: yes
+    state:  latest

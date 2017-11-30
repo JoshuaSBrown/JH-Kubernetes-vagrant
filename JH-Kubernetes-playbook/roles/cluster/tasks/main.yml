@@ -1,0 +1,27 @@
+---
+
+- name: Create hosts files for cluster
+  copy:
+    src:   create_hosts_file.sh
+    dest:  /home/vagrant/create_hosts_file.sh
+    mode:  0777
+    owner: root
+    group: root
+
+- name: Execute host file creation 
+  command: /home/vagrant/create_hosts_file.sh
+
+# Allow ssh between nodes simply with passwords
+- name: Config ssh to allow passwords
+  copy:
+    src:   sshd_config
+    dest:  /etc/ssh/sshd_config
+    mode:  0600
+    owner: root
+    group: root
+
+- name: Restart ssh service
+  service: 
+    name:    sshd
+    state:   restarted
+    enabled: yes
