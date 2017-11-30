@@ -6,11 +6,17 @@ This vagrantbox is designed to create a cluster of a master server
 with at most 4 minions. The ip addresses asssociated with each are 
 shown below:
 
-| 192.168.1.10 | master |
+--------------------------
+| 192.168.1.10 | master  |
+--------------------------
 | 192.168.1.11 | minion1 |
+--------------------------
 | 192.168.1.12 | minion2 |
+--------------------------
 | 192.168.1.13 | minion3 |
+--------------------------
 | 192.168.1.14 | minion4 |
+--------------------------
 
 The master node will act as a kubernetes server and will have the 
 following services running on it:
