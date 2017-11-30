@@ -1,22 +1,16 @@
-******************************************************************
+------------------------------------------------------------------
 General Layout and Overview
-******************************************************************
+------------------------------------------------------------------
 
 This vagrantbox is designed to create a cluster of a master server 
 with at most 4 minions. The ip addresses asssociated with each are 
 shown below:
 
---------------------------
-| 192.168.1.10 | master  |
---------------------------
-| 192.168.1.11 | minion1 |
---------------------------
-| 192.168.1.12 | minion2 |
---------------------------
-| 192.168.1.13 | minion3 |
---------------------------
-| 192.168.1.14 | minion4 |
---------------------------
+  192.168.1.10 - master  
+  192.168.1.11 - minion1 
+  192.168.1.12 - minion2 
+  192.168.1.13 - minion3 
+  192.168.1.14 - minion4 
 
 The master node will act as a kubernetes server and will have the 
 following services running on it:
@@ -37,13 +31,14 @@ Each minion will have the following services running:
 3. flanneld
 4. docker
 
-******************************************************************
+------------------------------------------------------------------
 Service Descriptions
-******************************************************************
+------------------------------------------------------------------
 
 A brief descritption of what each service is doing is now provided. 
 
 etcd
+------------------------------------------------------------------
 ******************************************************************
 
 This is the backbone of kubernetes it uses the raft protocol which
@@ -54,14 +49,14 @@ It is used within the kubernetes framework as a backing store.
 Basically all the cluser data is stored with etcd. 
 
 kube-apiserver
-******************************************************************
+------------------------------------------------------------------
 
 This service exposes the kubernetes api. It is the front-end or means
 by which user interacts with the kubernetes package. It scales by 
 deploying more instances (scales horizontally).
 
 kube-controller-manager
-******************************************************************
+------------------------------------------------------------------
 
 This service runs controllers; they are the baground threads that 
 handle routine tasks in the cluster. Each controller is a seperate 
@@ -82,13 +77,13 @@ simplicity. The controllers include:
                      and API access tokens for new namespaces. 
 
 kube-scheduler
-******************************************************************
+------------------------------------------------------------------
 
 This service watches newly created pods that have no node assigned,
 and selects a node for them to run on. 
 
 flanneld
-******************************************************************
+------------------------------------------------------------------
 
 Flannel runs a small, single binary agent called flanneld on each 
 host, and is responsible for allocating a subnet lease to each host 
