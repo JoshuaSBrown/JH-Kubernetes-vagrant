@@ -502,7 +502,7 @@ c.ProfilesSpawner.profiles = [("Host process", 'local','jupyterhub.spawner.Local
 #  Admin access should be treated the same way root access is.
 #  
 #  Defaults to an empty set, in which case no user has admin access.
-c.Authenticator.pawner_class = 'wrapspawner.ProfilesSpawner'#dmin_users = set('vagrant')
+c.Authenticator.spawner_class = 'wrapspawner.ProfilesSpawner'#dmin_users = set('vagrant')
 
 ## Dictionary mapping authenticator usernames to JupyterHub users.
 #  
