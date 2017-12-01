@@ -27,7 +27,7 @@
 #c.JupyterHub.admin_access = False
 
 ## DEPRECATED, use Authenticator.admin_users instead.
-#c.JupyterHub.admin_users = set()
+c.JupyterHub.admin_users = {'vagrant','jupyterhub'}
 
 ## Answer yes to any questions (e.g. confirm overwrite)
 #c.JupyterHub.answer_yes = False
@@ -81,7 +81,7 @@
 #  shutdown the Hub, leaving everything else running.
 #  
 #  The Hub should be able to resume from database state.
-c.JupyterHub.cleanup_servers = False
+#c.JupyterHub.cleanup_servers = False
 
 ## The config file to load
 #c.JupyterHub.config_file = 'jupyterhub_config.py'
@@ -130,13 +130,13 @@ c.JupyterHub.cleanup_servers = False
 
 ## The ip for this process
 #c.JupyterHub.hub_ip = '127.0.0.1'
-c.JupyterHub.hub_ip = '192.168.1.10'
+#c.JupyterHub.hub_ip = '192.168.1.10'
 
 ## The port for this process
-c.JupyterHub.hub_port = 8081
+#c.JupyterHub.hub_port = 8081
 
 ## The public facing ip of the whole application (the proxy)
-c.JupyterHub.ip = '192.168.1.10'
+#c.JupyterHub.ip = '192.168.1.10'
 
 ## Supply extra arguments that will be passed to Jinja environment.
 #c.JupyterHub.jinja_environment_options = {}
@@ -160,7 +160,7 @@ c.JupyterHub.ip = '192.168.1.10'
 #c.JupyterHub.pid_file = ''
 
 ## The public facing port of the proxy
-c.JupyterHub.port = 8000
+#c.JupyterHub.port = 8000
 
 ## The ip for the proxy API handlers
 #c.JupyterHub.proxy_api_ip = '127.0.0.1'
@@ -214,10 +214,10 @@ c.JupyterHub.port = 8000
 #  
 #  Should be a subclass of Spawner.
 #c.JupyterHub.spawner_class = 'jupyterhub.spawner.LocalProcessSpawner'
-c = get_config()
+#c = get_config()
 #c.JupyterHub.spawner_class = 'wrapspawner.ProfilesSpawner'
-c.ProfilesSpawner.profiles = [("Host process", 'local','jupyterhub.spawner.LocalProcessSpawner',{'ip':'0.0.0.0'}),
-('Docker Python 2/3','systemuser','dockerspawner.SystemUserSpawner',dict(container_image="jupyterhub/systemuser"))]
+#c.ProfilesSpawner.profiles = [("Host process", 'local','jupyterhub.spawner.LocalProcessSpawner',{'ip':'0.0.0.0'}),
+#('Docker Python 2/3','systemuser','dockerspawner.SystemUserSpawner',dict(container_image="jupyterhub/systemuser"))]
 #c.JupyterHub.spawner_class = 'sudospawner.Sudospawner'
 #'wrapspawner.ProfilesSpawner'
 #c.SudoSpawner.sudospawner_path = '/usr/bin/sudospawner'
@@ -416,7 +416,7 @@ c.ProfilesSpawner.profiles = [("Host process", 'local','jupyterhub.spawner.Local
 #  
 #  Note that this does *not* prevent users from accessing files outside of this
 #  path! They can do so with many other means.
-#c.Spawner.notebook_dir = ''
+c.Spawner.notebook_dir = '/home/vagrant'
 
 ## An HTML form for options a user can specify on launching their server.
 #  
@@ -502,7 +502,7 @@ c.ProfilesSpawner.profiles = [("Host process", 'local','jupyterhub.spawner.Local
 #  Admin access should be treated the same way root access is.
 #  
 #  Defaults to an empty set, in which case no user has admin access.
-c.Authenticator.spawner_class = 'wrapspawner.ProfilesSpawner'#dmin_users = set('vagrant')
+#c.Authenticator.spawner_class = 'wrapspawner.ProfilesSpawner'#dmin_users = set('vagrant')
 
 ## Dictionary mapping authenticator usernames to JupyterHub users.
 #  
@@ -524,7 +524,7 @@ c.Authenticator.spawner_class = 'wrapspawner.ProfilesSpawner'#dmin_users = set('
 #  restrictions the authenticator has in place.
 #  
 #  If empty, does not perform any additional restriction.
-c.Authenticator.whitelist = set('vagrant')
+#c.Authenticator.whitelist = set('vagrant')
 
 #------------------------------------------------------------------------------
 # LocalAuthenticator(Authenticator) configuration
@@ -559,7 +559,7 @@ c.Authenticator.whitelist = set('vagrant')
 #  already.
 #  
 #  Supports Linux and BSD variants only.
-c.LocalAuthenticator.create_system_users = False
+#c.LocalAuthenticator.create_system_users = False
 
 ## Whitelist all users from this UNIX group.
 #  
