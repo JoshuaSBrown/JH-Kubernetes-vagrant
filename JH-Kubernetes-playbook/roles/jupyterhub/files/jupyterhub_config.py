@@ -160,7 +160,7 @@ c.JupyterHub.admin_users = {'vagrant','jupyterhub'}
 #c.JupyterHub.pid_file = ''
 
 ## The public facing port of the proxy
-#c.JupyterHub.port = 8000
+c.JupyterHub.port = 8000
 
 ## The ip for the proxy API handlers
 #c.JupyterHub.proxy_api_ip = '127.0.0.1'
@@ -224,12 +224,12 @@ c.JupyterHub.admin_users = {'vagrant','jupyterhub'}
 ## Path to SSL certificate file for the public facing interface of the proxy
 #  
 #  Use with ssl_key
-#c.JupyterHub.ssl_cert = ''
+c.JupyterHub.ssl_cert = '/home/vagrant/.jupyter/mycert.pem'
 
 ## Path to SSL key file for the public facing interface of the proxy
 #  
 #  Use with ssl_cert
-#c.JupyterHub.ssl_key = ''
+c.JupyterHub.ssl_key = '/home/vagrant/.jupyter/mykey.key'
 
 ## Host to send statsd metrics to
 #c.JupyterHub.statsd_host = ''
@@ -416,7 +416,7 @@ c.JupyterHub.admin_users = {'vagrant','jupyterhub'}
 #  
 #  Note that this does *not* prevent users from accessing files outside of this
 #  path! They can do so with many other means.
-c.Spawner.notebook_dir = '/home/vagrant'
+c.Spawner.notebook_dir = '~'
 
 ## An HTML form for options a user can specify on launching their server.
 #  
@@ -524,7 +524,7 @@ c.Spawner.notebook_dir = '/home/vagrant'
 #  restrictions the authenticator has in place.
 #  
 #  If empty, does not perform any additional restriction.
-#c.Authenticator.whitelist = set('vagrant')
+c.Authenticator.whitelist = {'vagrant','jupyterhub'}
 
 #------------------------------------------------------------------------------
 # LocalAuthenticator(Authenticator) configuration
